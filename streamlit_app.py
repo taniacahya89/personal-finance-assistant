@@ -111,13 +111,31 @@ st.markdown("""
             
     .stSelectbox div[data-baseweb="select"],
     .stTextInput > div > div > input,
-    .stNumberInput input,
     .stDateInput input {
         background-color: #ffffff !important;
         color: #2d3748 !important;
         border: 1px solid #e2e8f0 !important;
         border-radius: 8px !important;
     }
+            
+    .stNumberInput button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    transition: all 0.2s ease-in-out;
+    }
+
+    .stNumberInput button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+    }
+    
+    .stNumberInput button:active {
+    transform: scale(0.95);
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+    }
+
 
     /* Dropdown arrow dan teks dalam select */
     .stSelectbox div[data-baseweb="select"] > div {
