@@ -142,7 +142,33 @@ st.markdown("""
         height: 12px;
         border-radius: 10px;
     }
+            
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .block-container {
+            padding: 1rem !important;
+        }
+        
+        h1 {
+            font-size: 2rem !important;
+        }
+        
+        [data-testid="stMetric"] {
+            padding: 1rem !important;
+        }
+        
+        [data-testid="stMetric"] [data-testid="stMetricValue"] {
+            font-size: 1.3rem !important;
+        }
+        
+        /* Stack columns on mobile */
+        [data-testid="column"] {
+            width: 100% !important;
+            flex: 100% !important;
+        }
+    }
 </style>
+
 """, unsafe_allow_html=True)
 
 # Initialize database
