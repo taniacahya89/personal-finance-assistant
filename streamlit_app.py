@@ -108,6 +108,45 @@ st.markdown("""
         color: white !important;
         font-weight: 600;
     }
+            
+    .stSelectbox div[data-baseweb="select"],
+    .stTextInput > div > div > input,
+    .stNumberInput input,
+    .stDateInput input {
+        background-color: #ffffff !important;
+        color: #2d3748 !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+    }
+
+    /* Dropdown arrow dan teks dalam select */
+    .stSelectbox div[data-baseweb="select"] > div {
+        background-color: #ffffff !important;
+        color: #2d3748 !important;
+    }
+
+    /* Placeholder atau teks abu di dalam input */
+    .stSelectbox label, .stDateInput label, .stTextInput label {
+        color: #718096 !important;
+    }
+
+    /* Hover & focus efek biar elegan */
+    .stSelectbox div[data-baseweb="select"]:hover,
+    .stTextInput > div > div > input:hover,
+    .stNumberInput input:hover,
+    .stDateInput input:hover {
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 1px #667eea !important;
+    }
+
+    /* Focus ring (saat diklik) */
+    .stSelectbox div[data-baseweb="select"]:focus-within,
+    .stTextInput > div > div > input:focus,
+    .stNumberInput input:focus,
+    .stDateInput input:focus {
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3) !important;
+    }
     
     .stButton button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
