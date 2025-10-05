@@ -311,7 +311,7 @@ if page == "Dashboard":
         if analysis['category_breakdown']:
             df_category = pd.DataFrame([{"Category": k, "Amount": v} for k, v in analysis['category_breakdown'].items()])
             fig = px.pie(df_category, values='Amount', names='Category', hole=0.4, color_discrete_sequence=px.colors.qualitative.Set3)
-            fig.update_layout(font=dict(family="Inter"), height=400)
+            fig.update_layout(font=dict(family="Inter", color='#2d3748'), height=400, paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)',showlegend=True)
             st.plotly_chart(fig, use_container_width=True)
     
     with col2:
@@ -325,7 +325,7 @@ if page == "Dashboard":
             go.Bar(name='Ideal', x=df_budget['Category'], y=df_budget['Ideal'], marker_color='#a8dadc'),
             go.Bar(name='Actual', x=df_budget['Category'], y=df_budget['Actual'], marker_color='#457b9d')
         ])
-        fig.update_layout(barmode='group', font=dict(family="Inter"), height=400)
+        fig.update_layout(barmode='group', font=dict(family="Inter", color='#2d3748'), height=400, paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)',showlegend=True)
         st.plotly_chart(fig, use_container_width=True)
     
     st.divider()
