@@ -66,30 +66,49 @@ st.markdown("""
     }
     
     /* Input fields in sidebar - BLACK text */
-    [data-testid="stSidebar"] .stTextInput input,
-    [data-testid="stSidebar"] .stNumberInput input,
-    [data-testid="stSidebar"] .stSelectbox select {
-        color: #2d3748 !important;
-        background: white !important;
-        border: 2px solid rgba(255, 255, 255, 0.3) !important;
-    }
-    
-    [data-testid="stSidebar"] .stTextInput input::placeholder {
-        color: #718096 !important;
-    }
-    
-    [data-testid="stMetric"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    }
-    
-    [data-testid="stMetric"] label,
-    [data-testid="stMetric"] [data-testid="stMetricValue"],
-    [data-testid="stMetric"] [data-testid="stMetricDelta"] {
+    [data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+}
+
+    /* Sidebar text colors */
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3,
+    [data-testid="stSidebar"] h4,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] .stMarkdown {
         color: white !important;
-        font-weight: 600;
+    }
+
+    /* Hide radio circles completely */
+    [data-testid="stSidebar"] [role="radiogroup"] label > div[data-testid="stMarkdownContainer"] {
+        padding-left: 0 !important;
+    }
+
+    [data-testid="stSidebar"] [role="radio"] {
+        display: none !important;
+    }
+
+    /* Style radio labels as buttons */
+    [data-testid="stSidebar"] [role="radiogroup"] label {
+        background: rgba(255, 255, 255, 0.1) !important;
+        padding: 0.7rem 1rem !important;
+        border-radius: 8px !important;
+        margin-bottom: 0.5rem !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        border: 2px solid transparent !important;
+    }
+
+    [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* Active state */
+    [data-testid="stSidebar"] [role="radiogroup"] label[data-selected="true"] {
+        background: rgba(255, 255, 255, 0.25) !important;
+        border-left: 4px solid white !important;
     }
     
     .stButton button {
@@ -305,15 +324,28 @@ if page == "Dashboard":
     st.divider()
     
     col1, col2 = st.columns(2)
-    
+
     with col1:
         st.subheader("📊 Expense Breakdown")
         if analysis['category_breakdown']:
             df_category = pd.DataFrame([{"Category": k, "Amount": v} for k, v in analysis['category_breakdown'].items()])
             fig = px.pie(df_category, values='Amount', names='Category', hole=0.4, color_discrete_sequence=px.colors.qualitative.Set3)
-            fig.update_layout(font=dict(family="Inter", color='#2d3748'), height=400, paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)',showlegend=True)
-            st.plotly_chart(fig, use_container_width=True)
-    
+            fig.update_layout(
+                font=dict(family="Inter", color='#2d3748', size=14),
+                height=400,
+                paper_bgcolor='white',
+                plot_bgcolor='white',
+                showlegend=True,
+                legend=dict(
+                    font=dict(color='#2d3748', size=12)
+                )
+            )
+            fig.update_traces(
+                textfont=dict(color='#2d3748', size=12),
+                marker=dict(line=dict(color='white', width=2))
+            )
+            st.plotly_chart(fig, use_container_width=True)  
+
     with col2:
         st.subheader("🎯 Budget vs Actual")
         df_budget = pd.DataFrame({
@@ -325,9 +357,28 @@ if page == "Dashboard":
             go.Bar(name='Ideal', x=df_budget['Category'], y=df_budget['Ideal'], marker_color='#a8dadc'),
             go.Bar(name='Actual', x=df_budget['Category'], y=df_budget['Actual'], marker_color='#457b9d')
         ])
-        fig.update_layout(barmode='group', font=dict(family="Inter", color='#2d3748'), height=400, paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)',showlegend=True)
+        fig.update_layout(
+            barmode='group',
+            font=dict(family="Inter", color='#2d3748', size=14),
+            height=400,
+            paper_bgcolor='white',
+            plot_bgcolor='white',
+            showlegend=True,
+            legend=dict(
+                font=dict(color='#2d3748', size=12)
+            ),
+            xaxis=dict(
+                tickfont=dict(color='#2d3748', size=12),
+                titlefont=dict(color='#2d3748')
+            ),
+            yaxis=dict(
+                tickfont=dict(color='#2d3748', size=12),
+                titlefont=dict(color='#2d3748'),
+                gridcolor='#e2e8f0'
+            )
+        )
         st.plotly_chart(fig, use_container_width=True)
-    
+
     st.divider()
     
     st.subheader("💡 Personalized Financial Tips")
