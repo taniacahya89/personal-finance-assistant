@@ -49,6 +49,23 @@ st.markdown("""
         font-weight: 600;
         color: #2d3748;
     }
+            
+    /* Force light mode for main app container */
+    html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"], .main {
+        background-color: #f8f9ff !important;
+        color: #2d3748 !important;
+    }
+            
+    .plot-container, .main-svg, .js-plotly-plot .plotly {
+        background: none !important;
+    }
+
+    div[data-testid="stHorizontalBlock"] > div {
+        background-color: white !important;
+        border-radius: 16px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
     
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
